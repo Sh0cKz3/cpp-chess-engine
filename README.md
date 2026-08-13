@@ -1,4 +1,4 @@
-#C++ Chess Engine
+# C++ Chess Engine
 
 A chess engine written from scratch in C++
 
@@ -8,3 +8,4 @@ A chess engine written from scratch in C++
 - Implement a legal chess movement system
 - Implement a chess engine
 - Experiment with search algorithms and performance optimisations
+
