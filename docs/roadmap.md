@@ -7,9 +7,9 @@
 - [x] Create README
 - [x] Create .gitignore
 - [x] Create initial C++ program
-- [ ] Set up CMake
-- [ ] Set up SFML
-- [ ] Create basic project structure
+- [x] Set up CMake
+- [x] Set up SFML
+- [x] Create basic project structure
 
 ## Phase 2 — Graphical chessboard
 
