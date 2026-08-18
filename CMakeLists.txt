@@ -7,7 +7,13 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(SFML 3 COMPONENTS Graphics Window System REQUIRED)
 
-add_executable(ChessEngine src/main.cpp)
+add_executable(ChessEngine 
+src/main.cpp
+src/Board.cpp
+src/Piece.cpp
+)
+
+target_include_directories(ChessEngine PRIVATE ${CMAKE_SOURCE_DIR}/include)
 
 target_link_libraries(ChessEngine PRIVATE 
 SFML::Graphics 

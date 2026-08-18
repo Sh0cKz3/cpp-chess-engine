@@ -1,4 +1,5 @@
 #include "Piece.hpp"
+#include "Board.hpp"
 #include <SFML/Graphics.hpp>
 #include <optional>
 
@@ -11,6 +12,9 @@ int main(){
     const float squareSize = 100.0f;
     int selectedRow = -1;
     int selectedColumn = -1;
+
+    Board board;
+
 
     while (window.isOpen()) {
         while (const std::optional<sf::Event> event = window.pollEvent()) {
@@ -52,6 +56,8 @@ int main(){
                 window.draw(square);
             }
         }
+
+
 
         window.display();
     }

@@ -11,7 +11,7 @@ enum class PieceType
     King
 };
 
-enum class PieceColor
+enum class PieceColour
 {
     White,
     Black
@@ -20,8 +20,10 @@ enum class PieceColor
 class Piece
 {
 public:
+    Piece(PieceType type, PieceColour colour);
+
     PieceType type;
-    PieceColor color;
+    PieceColour colour;
 };
 
 #endif

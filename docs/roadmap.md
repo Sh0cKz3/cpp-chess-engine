@@ -13,11 +13,11 @@
 
 ## Phase 2 — Graphical chessboard
 
-- [X] Create application window
-- [X] Render 8×8 chessboard
+- [x] Create application window
+- [x] Render 8×8 chessboard
 - [ ] Load chess piece textures
 - [ ] Render pieces
-- [ ] Map mouse coordinates to board squares
+- [x] Map mouse coordinates to board squares
 
 ## Phase 3 — Board state
 
