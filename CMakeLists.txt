@@ -11,6 +11,7 @@ add_executable(ChessEngine
 src/main.cpp
 src/Board.cpp
 src/Piece.cpp
+src/PieceTextures.cpp
 )
 
 target_include_directories(ChessEngine PRIVATE ${CMAKE_SOURCE_DIR}/include)

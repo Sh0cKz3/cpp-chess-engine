@@ -1,20 +1,23 @@
 #include "Piece.hpp"
 #include "Board.hpp"
+#include "PieceTextures.hpp"
 #include <SFML/Graphics.hpp>
 #include <optional>
 
 int main(){
-    sf::RenderWindow window(
-        sf::VideoMode({800, 800}),
-         "Chess Engine"
-        );
-
-    const float squareSize = 100.0f;
+    const int windowSize = 1200;
+    const float squareSize = windowSize / 8.0f;
     int selectedRow = -1;
     int selectedColumn = -1;
 
     Board board;
+    PieceTextures pieceTextures;
 
+
+    sf::RenderWindow window(
+        sf::VideoMode({windowSize, windowSize}),
+         "Chess Engine"
+        );
 
     while (window.isOpen()) {
         while (const std::optional<sf::Event> event = window.pollEvent()) {
@@ -54,10 +57,25 @@ int main(){
                 }
 
                 window.draw(square);
+
+                const auto& piece = board.getPiece(row, col); // Auto because optional
+                if (piece) {
+                    const sf::Texture& texture = pieceTextures.getTexture(piece->type, piece->colour);
+
+                    sf::Sprite sprite(texture);
+
+                    const auto textureSize = texture.getSize();
+
+                    const float scaleX = squareSize / textureSize.x;
+                    const float scaleY = squareSize / textureSize.y;
+
+                    sprite.setScale({scaleX, scaleY});
+                    sprite.setPosition({col * squareSize, row * squareSize});
+
+                    window.draw(sprite);
+                }   
             }
         }
-
-
 
         window.display();
     }

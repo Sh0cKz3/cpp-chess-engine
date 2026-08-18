@@ -15,16 +15,16 @@
 
 - [x] Create application window
 - [x] Render 8×8 chessboard
-- [ ] Load chess piece textures
-- [ ] Render pieces
+- [x] Load chess piece textures
+- [x] Render pieces
 - [x] Map mouse coordinates to board squares
 
 ## Phase 3 — Board state
 
-- [ ] Design board representation
-- [ ] Represent pieces
-- [ ] Initialise starting position
-- [ ] Connect board state to graphical representation
+- [x] Design board representation
+- [x] Represent pieces
+- [x] Initialise starting position
+- [x] Connect board state to graphical representation
 
 ## Phase 4 — Interaction
 
