@@ -35,6 +35,11 @@ int main(){
                     selectedRow = row;
                     selectedColumn = column;
                 }
+
+                if (mouseButtonPressedEvent->button == sf::Mouse::Button::Right) {
+                    selectedRow = -1;
+                    selectedColumn = -1;
+                }
             }
         }
 
