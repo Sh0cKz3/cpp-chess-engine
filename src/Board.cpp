@@ -29,3 +29,19 @@ Board::Board() {
     squares[7][column] = Piece(backRank[column], PieceColour::White);
     }
 }
+
+void Board::movePiece(int fromRow, int fromColumn, int toRow, int toColumn) {
+    squares[toRow][toColumn] = squares[fromRow][fromColumn];
+    squares[fromRow][fromColumn].reset();
+
+    if (turn == PieceColour::White) {
+        turn = PieceColour::Black;
+    } 
+    else {
+        turn = PieceColour::White;
+    }
+}
+
+PieceColour Board::getTurn() const {
+    return turn;
+}

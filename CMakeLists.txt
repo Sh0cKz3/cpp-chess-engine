@@ -12,6 +12,7 @@ src/main.cpp
 src/Board.cpp
 src/Piece.cpp
 src/PieceTextures.cpp
+src/Renderer.cpp
 )
 
 target_include_directories(ChessEngine PRIVATE ${CMAKE_SOURCE_DIR}/include)
