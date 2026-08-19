@@ -74,8 +74,8 @@ int main(){
                     const float scaleX = squareSize / textureSize.x;
                     const float scaleY = squareSize / textureSize.y;
 
-                    sprite.setScale({scaleX, scaleY});
-                    sprite.setPosition({col * squareSize, row * squareSize});
+                    sprite.setScale({scaleX * 0.9f, scaleY * 0.9f});
+                    sprite.setPosition({col * squareSize + (squareSize - squareSize * 0.9f) / 2.0f, row * squareSize + (squareSize - squareSize * 0.9f) / 1.5f}); //center the sprite in the square at 90% size
 
                     window.draw(sprite);
                 }   

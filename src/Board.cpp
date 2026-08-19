@@ -17,6 +17,7 @@ const PieceType backRank[8] =
     PieceType::Rook
 };
 
+// initialize the board with pieces in their starting positions
 Board::Board() {
     for (int column = 0; column < 8; ++column){
     squares[1][column] = Piece(PieceType::Pawn, PieceColour::Black);
