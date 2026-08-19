@@ -33,7 +33,6 @@ int main(){
 
                     const int column = static_cast<int>(mousePosition.x / squareSize); // Explicitly convert to int
                     const int row = static_cast<int>(mousePosition.y / squareSize);
-                    const auto& destinationPiece = board.getPiece(row, column);
 
                     if(selectedRow == -1 && selectedColumn == -1) {
                         const auto& piece = board.getPiece(row, column); // Auto because optional
@@ -44,8 +43,9 @@ int main(){
                         }                        
                     }
 
-                    else if (!destinationPiece || destinationPiece->colour != board.getTurn()) {
+                    else if (board.isLegalMove(selectedRow, selectedColumn, row, column)) {
                         board.movePiece(selectedRow, selectedColumn, row, column);
+
                         selectedRow = -1;
                         selectedColumn = -1;
                     }  

@@ -45,3 +45,19 @@ void Board::movePiece(int fromRow, int fromColumn, int toRow, int toColumn) {
 PieceColour Board::getTurn() const {
     return turn;
 }
+
+bool Board::isLegalMove(int fromRow, int fromColumn, int toRow, int toColumn) const {
+    const auto& piece = squares[fromRow][fromColumn];
+    const auto& destinationPiece = squares[toRow][toColumn];
+
+    if (!piece) {
+        return false;
+    }
+
+    if (destinationPiece && 
+        destinationPiece->colour == piece->colour) {
+        return false;
+    }
+
+    return true;
+}

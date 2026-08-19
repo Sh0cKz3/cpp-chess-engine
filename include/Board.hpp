@@ -20,6 +20,8 @@ public:
     void movePiece(int fromRow, int fromColumn, int toRow, int toColumn);
 
     PieceColour getTurn() const;
+
+    bool isLegalMove(int fromRow, int fromColumn, int toRow, int toColumn) const;
 };
 
 #endif
