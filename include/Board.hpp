@@ -22,6 +22,8 @@ public:
     PieceColour getTurn() const;
 
     bool isLegalMove(int fromRow, int fromColumn, int toRow, int toColumn) const;
+
+    bool isPathClear(int fromRow, int fromColumn, int toRow, int toColumn) const;
 };
 
 #endif

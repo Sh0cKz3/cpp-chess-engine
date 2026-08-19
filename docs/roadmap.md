@@ -28,16 +28,16 @@
 
 ## Phase 4 — Interaction
 
-- [ ] Select a piece
-- [ ] Move a piece
-- [ ] Prevent two pieces occupying one square
-- [ ] Implement captures
-- [ ] Add turn system
+- [x] Select a piece
+- [x] Move a piece
+- [x] Prevent two pieces occupying one square
+- [x] Implement captures
+- [x] Add turn system
 
 ## Phase 5 — Chess rules
 
-- [ ] Pawn movement
-- [ ] Knight movement
+- [x] Pawn movement
+- [x] Knight movement
 - [ ] Bishop movement
 - [ ] Rook movement
 - [ ] Queen movement
