@@ -46,7 +46,7 @@
 - [ ] Checkmate
 - [x] Castling
 - [x] En passant
-- [ ] Promotion
+- [ ] Promotion 
 
 ## Phase 6 — Basic engine
 

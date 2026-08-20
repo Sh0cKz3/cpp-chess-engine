@@ -2,14 +2,15 @@
 #include "Board.hpp"
 #include "Renderer.hpp"
 #include "PieceTextures.hpp"
+#include "ChessRules.hpp"
 #include <SFML/Graphics.hpp>
 #include <optional>
 
 int main(){
-    const int windowSize = 1000;
-    const float squareSize = windowSize / 8.0f;
-    int selectedRow = -1;
-    int selectedColumn = -1;
+    const int windowSize = {1000};
+    const float squareSize = {windowSize / 8.0f};
+    int selectedRow = {-1};
+    int selectedColumn = {-1};
 
     Board board;
     PieceTextures pieceTextures;
@@ -43,7 +44,7 @@ int main(){
                         }                        
                     }
 
-                    else if (board.isLegalMove(selectedRow, selectedColumn, row, column)) {
+                    else if (ChessRules::IsLegalMove(board, selectedRow, selectedColumn, row, column)) {
                         board.movePiece(selectedRow, selectedColumn, row, column);
 
                         selectedRow = -1;
