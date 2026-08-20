@@ -38,14 +38,14 @@
 
 - [x] Pawn movement
 - [x] Knight movement
-- [ ] Bishop movement
-- [ ] Rook movement
-- [ ] Queen movement
-- [ ] King movement
+- [x] Bishop movement
+- [x] Rook movement
+- [x] Queen movement
+- [x] King movement
 - [ ] Check detection
 - [ ] Checkmate
 - [ ] Castling
-- [ ] En passant
+- [x] En passant
 - [ ] Promotion
 
 ## Phase 6 — Basic engine
