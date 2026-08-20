@@ -2,7 +2,7 @@
 #define BOARD_HPP
 
 #include "Piece.hpp"
-
+#include <utility>
 #include <optional>
 #include <array>
 
@@ -10,6 +10,7 @@ class Board
 {
 private:
     std::array<std::array<std::optional<Piece>, 8>, 8> squares;
+    std::optional<std::pair<int, int>> enPassantTarget;
     PieceColour turn = PieceColour::White;
 
     bool WhiteKingMoved = false;

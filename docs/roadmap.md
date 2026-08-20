@@ -42,9 +42,9 @@
 - [x] Rook movement
 - [x] Queen movement
 - [x] King movement
-- [ ] Check detection
+- [x] Check detection
 - [ ] Checkmate
-- [ ] Castling
+- [x] Castling
 - [x] En passant
 - [ ] Promotion
 
