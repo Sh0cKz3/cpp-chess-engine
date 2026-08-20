@@ -43,8 +43,8 @@
 - [x] Queen movement
 - [x] King movement
 - [x] Check detection
-- [ ] Checkmate
-- [ ] Stalemate
+- [x] Checkmate
+- [x] Stalemate
 - [x] Castling
 - [x] En passant
 - [x] Promotion 
