@@ -44,9 +44,10 @@
 - [x] King movement
 - [x] Check detection
 - [ ] Checkmate
+- [ ] Stalemate
 - [x] Castling
 - [x] En passant
-- [ ] Promotion 
+- [x] Promotion 
 
 ## Phase 6 — Basic engine
 

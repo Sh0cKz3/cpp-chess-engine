@@ -41,6 +41,13 @@ public:
         int toRow,
         int toColumn
     );
+
+    static bool HasLegalMoves(const Board& board, PieceColour colour);
+
+    static bool IsCheckmate(const Board& board, PieceColour colour);
+
+    static bool IsStalemate(const Board& board, PieceColour colour);
+
 };
 
 #endif

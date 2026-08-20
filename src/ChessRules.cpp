@@ -137,7 +137,7 @@ bool ChessRules::IsLegalMove(
             return false;
         }
     }
-    
+
     Board testBoard = board;
 
     testBoard.makeMove(
@@ -149,6 +149,55 @@ bool ChessRules::IsLegalMove(
 
     return !IsKingInCheck(testBoard, movingColour);
 }
+
+bool ChessRules::HasLegalMoves(
+    const Board& board,
+    PieceColour colour
+) {
+    for (int fromRow = 0; fromRow < 8; ++fromRow) {
+        for (int fromColumn = 0; fromColumn < 8; ++fromColumn) {
+
+            const auto& piece = board.getPiece(fromRow, fromColumn);
+
+            if (!piece || piece->colour != colour) {
+                continue;
+            }
+
+            for (int toRow = 0; toRow < 8; ++toRow) {
+                for (int toColumn = 0; toColumn < 8; ++toColumn) {
+
+                    if (IsLegalMove(
+                            board,
+                            fromRow,
+                            fromColumn,
+                            toRow,
+                            toColumn)) {
+                        return true;
+                    }
+                }
+            }
+        }
+    }
+
+    return false;
+}
+
+bool ChessRules::IsCheckmate(
+    const Board& board,
+    PieceColour colour
+) {
+    return IsKingInCheck(board, colour) &&
+           !HasLegalMoves(board, colour);
+}
+
+bool ChessRules::IsStalemate(
+    const Board& board,
+    PieceColour colour
+) {
+    return !IsKingInCheck(board, colour) &&
+           !HasLegalMoves(board, colour);
+}
+
 
 bool ChessRules::IsPseudoLegalMove(
     const Board& board,
@@ -170,34 +219,50 @@ bool ChessRules::IsPseudoLegalMove(
 
     switch (piece->type) {
         case PieceType::Pawn: {
-            int direction = (piece->colour == PieceColour::White) ? -1 : 1;
+        int direction = (piece->colour == PieceColour::White) ? -1 : 1;
 
-            if (fromColumn == toColumn) {
-                if (toRow == fromRow + direction && !destinationPiece) {
-                    return true;
-                }
-
-                if ((fromRow == 1 && piece->colour == PieceColour::Black) ||
-                    (fromRow == 6 && piece->colour == PieceColour::White)) {
-
-                    if (toRow == fromRow + 2 * direction &&
-                        !destinationPiece &&
-                        !board.getPiece(fromRow + direction, fromColumn)) {
-                        return true;
-                    }
-                }
+        if (fromColumn == toColumn) {
+            if (toRow == fromRow + direction && !destinationPiece) {
+                return true;
             }
-            else if (std::abs(fromColumn - toColumn) == 1 &&
-                     toRow == fromRow + direction) {
 
-                if (destinationPiece &&
-                    destinationPiece->colour != piece->colour) {
+            if ((fromRow == 1 && piece->colour == PieceColour::Black) ||
+                (fromRow == 6 && piece->colour == PieceColour::White)) {
+
+                if (toRow == fromRow + 2 * direction &&
+                    !destinationPiece &&
+                    !board.getPiece(fromRow + direction, fromColumn)) {
                     return true;
                 }
             }
-
-            return false;
         }
+        else if (std::abs(fromColumn - toColumn) == 1 && toRow == fromRow + direction) {
+
+            // Normal capture
+            if (destinationPiece &&
+                destinationPiece->colour != piece->colour) {
+                return true;
+            }
+
+            // En passant
+            if (!destinationPiece &&
+                board.enPassantTarget &&
+                toRow == board.enPassantTarget->first &&
+                toColumn == board.enPassantTarget->second) {
+
+                const auto& adjacentPiece =
+                    board.getPiece(fromRow, toColumn);
+
+                if (adjacentPiece &&
+                    adjacentPiece->type == PieceType::Pawn &&
+                    adjacentPiece->colour != piece->colour) {
+                    return true;
+                }
+            }
+        }
+
+    return false;
+}
 
         case PieceType::Knight: {
             int rowDiff = std::abs(toRow - fromRow);

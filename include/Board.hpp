@@ -16,6 +16,12 @@ private:
     std::optional<std::pair<int, int>> enPassantTarget;
     PieceColour turn = PieceColour::White;
 
+    PieceColour PromotionColour;
+    bool PromotionPending = {false};
+    int PromotionRow = {-1};
+    int PromotionColumn = {-1};
+    
+
     bool WhiteKingMoved = {false};
     bool BlackKingMoved = {false};
 
@@ -32,9 +38,20 @@ public:
 
     const std::optional<Piece>& getPiece(int row, int column) const;
 
-    void movePiece(int fromRow, int fromColumn, int toRow, int toColumn);
+    void MovePiece(
+        int fromRow, 
+        int fromColumn, 
+        int toRow, 
+        int toColumn
+    );
 
-    PieceColour getTurn() const;
+    PieceColour GetTurn() const;
+
+    bool IsPromotionPending() const;
+    PieceColour GetPromotionColour() const;
+    int GetPromotionRow() const;
+    int GetPromotionColumn() const;
+    void Promote(PieceType type);
 };
 
 #endif

@@ -13,11 +13,17 @@ class Renderer {
     public:
         Renderer(const PieceTextures& pieceTextures, float squareSize);
 
-        void draw(
+        void Draw(
             sf::RenderWindow& window, 
             const Board& board,
             int selectedRow,
-            int selectedColumn) const;
+            int selectedColumn
+        );
+
+        void DrawPromotionOptions(
+            sf::RenderWindow& window,
+            const Board& board
+        );
 };
 
 #endif

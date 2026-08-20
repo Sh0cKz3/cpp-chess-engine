@@ -6,6 +6,23 @@ const std::optional<Piece>& Board::getPiece(int row, int column) const {
     return squares[row][column];
 }
 
+bool Board::IsPromotionPending() const {
+    return PromotionPending;
+}
+PieceColour Board::GetPromotionColour() const {
+    return PromotionColour;
+}
+int Board::GetPromotionRow() const {
+    return PromotionRow;
+}
+int Board::GetPromotionColumn() const {
+    return PromotionColumn;
+}
+PieceColour Board::GetTurn() const {
+    return turn;
+}
+
+
 const PieceType backRank[8] =
 {
     PieceType::Rook,
@@ -36,7 +53,26 @@ void Board::makeMove(int fromRow, int fromColumn, int toRow, int toColumn) {
     squares[fromRow][fromColumn].reset();
 }
 
-void Board::movePiece(int fromRow, int fromColumn, int toRow, int toColumn)
+void Board::Promote(PieceType type) {
+    if (!PromotionPending) {
+        return;
+    }
+
+    squares[PromotionRow][PromotionColumn] = Piece(type, PromotionColour);
+    PromotionPending = false;
+    PromotionRow = -1;
+    PromotionColumn = -1;
+
+    if (turn == PieceColour::White) {
+        turn = (turn == PieceColour::White) ? PieceColour::Black : PieceColour::White;
+    }
+}
+
+void Board::MovePiece(
+    int fromRow, 
+    int fromColumn, 
+    int toRow, 
+    int toColumn)
 {
     const auto movingPiece = squares[fromRow][fromColumn];
 
@@ -98,6 +134,17 @@ void Board::movePiece(int fromRow, int fromColumn, int toRow, int toColumn)
     if (isEnPassant)
     {
         squares[fromRow][toColumn].reset();
+    }
+
+    // Promotion
+    if (movingPiece &&
+        movingPiece->type == PieceType::Pawn &&
+        (toRow == 0 || toRow == 7))
+    {
+        PromotionPending = true;
+        PromotionColour = movingPiece->colour;
+        PromotionRow = toRow;
+        PromotionColumn = toColumn;
     }
 
     // Castling
@@ -179,16 +226,7 @@ void Board::movePiece(int fromRow, int fromColumn, int toRow, int toColumn)
     }
 
     // Change turn
-    if (turn == PieceColour::White)
-    {
-        turn = PieceColour::Black;
+    if (!PromotionPending) {
+        turn = (turn == PieceColour::White) ? PieceColour::Black : PieceColour::White;
     }
-    else
-    {
-        turn = PieceColour::White;
-    }
-}
-
-PieceColour Board::getTurn() const {
-    return turn;
 }
