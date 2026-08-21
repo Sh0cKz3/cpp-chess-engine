@@ -6,20 +6,15 @@ const std::optional<Piece>& Board::getPiece(int row, int column) const {
     return squares[row][column];
 }
 
-bool Board::IsPromotionPending() const {
-    return PromotionPending;
-}
-PieceColour Board::GetPromotionColour() const {
-    return PromotionColour;
-}
-int Board::GetPromotionRow() const {
-    return PromotionRow;
-}
-int Board::GetPromotionColumn() const {
-    return PromotionColumn;
-}
-PieceColour Board::GetTurn() const {
-    return turn;
+bool Board::IsPromotionPending() const {return PromotionPending;}
+PieceColour Board::GetPromotionColour() const {return PromotionColour;}
+int Board::GetPromotionRow() const {return PromotionRow;}
+int Board::GetPromotionColumn() const {return PromotionColumn;}
+PieceColour Board::GetTurn() const {return turn;}
+int Board::GetHalfmoveClock() const{return HalfmoveClock;}
+
+bool Board::IsFiftyMoveDraw() const {
+    return HalfmoveClock >= 100;
 }
 
 
@@ -75,9 +70,11 @@ void Board::MovePiece(
     int toColumn)
 {
     const auto movingPiece = squares[fromRow][fromColumn];
-
     // Check if a rook is about to be captured (for castling rights)
     const auto capturedPiece = squares[toRow][toColumn];
+
+    if (movingPiece->type == PieceType::Pawn || capturedPiece){HalfmoveClock = 0;} // 50 move rule
+    else{++HalfmoveClock;}
 
     if (capturedPiece && capturedPiece->type == PieceType::Rook)
     {

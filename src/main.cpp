@@ -97,6 +97,9 @@ int main(){
                         else if (ChessRules::IsStalemate(board, board.GetTurn())) {
                             std::cout << "STALEMATE!\n";
                             }
+                        else if (board.IsFiftyMoveDraw()){
+                            std::cout << "50-MOVE DRAW!\n";
+                        }
 
                         selectedRow = -1;
                         selectedColumn = -1;

@@ -213,7 +213,8 @@ bool ChessRules::IsPseudoLegalMove(
         return false;
     }
 
-    if (fromRow == toRow && fromColumn == toColumn) {
+    if ((fromRow == toRow && fromColumn == toColumn) || 
+    (destinationPiece && destinationPiece->colour == piece->colour)) {
         return false;
     }
 
@@ -403,4 +404,3 @@ bool ChessRules::IsPseudoLegalMove(
 
     return false;
 }
-

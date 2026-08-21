@@ -16,6 +16,8 @@ private:
     std::optional<std::pair<int, int>> enPassantTarget;
     PieceColour turn = PieceColour::White;
 
+    int HalfmoveClock = {0};
+
     PieceColour PromotionColour;
     bool PromotionPending = {false};
     int PromotionRow = {-1};
@@ -52,6 +54,9 @@ public:
     int GetPromotionRow() const;
     int GetPromotionColumn() const;
     void Promote(PieceType type);
+
+    int GetHalfmoveClock() const;
+    bool IsFiftyMoveDraw() const;
 };
 
 #endif
