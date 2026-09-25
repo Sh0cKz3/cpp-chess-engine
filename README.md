@@ -27,6 +27,30 @@ An ongoing chess application and engine project written from scratch (high-level
 - CMake
 - Git / GitHub
 
+## Building the project
+
+### Requirements
+
+- C++ comiler
+- CMake
+- SFML 3
+
+### Build
+
+Clone the repository using:
+
+    git clone https://github.com/Sh0cKz3/cpp-chess-engine.git
+    cd cpp-chess-engine
+
+Configure and build using CMake commands in terminal:
+
+    cmake --preset default
+    cmake --build build
+
+Then run using the exectuable by standard command:
+
+    ./build/ChessEngine.exe
+
 ## Project Structure
 
 - `include/` — header files
