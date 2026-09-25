@@ -1,6 +1,6 @@
 # C++ Chess Engine
 
-An ongoing chess application and engine project written from scratch (high-level) in C++ using SFML.
+An ongoing chess application and engine project written from scratch in C++ using SFML.
 
 ![Chess board](assets/chess.png)
 
@@ -31,7 +31,7 @@ An ongoing chess application and engine project written from scratch (high-level
 
 ### Requirements
 
-- C++ comiler
+- C++ compiler
 - CMake
 - SFML 3
 
@@ -47,7 +47,7 @@ Configure and build using CMake commands in terminal:
     cmake --preset default
     cmake --build build
 
-Then run using the exectuable by standard command:
+Then run using the executable by standard command:
 
     ./build/ChessEngine.exe
 
