@@ -2,7 +2,7 @@
 
 An ongoing chess application and engine project written from scratch (high-level) in C++ using SFML.
 
-![Chess board](assets/chess-board.png)
+![Chess board](assets/chess.png)
 
 ## Current Progress
 
