@@ -2,6 +2,8 @@
 #define CHESS_RULLES_HPP
 
 #include "Board.hpp"
+#include "Move.hpp"
+#include <vector>
 
 class ChessRules
 {
@@ -48,6 +50,19 @@ public:
 
     static bool IsStalemate(const Board& board, PieceColour colour);
 
+    static std::vector<Move> GenerateLegalMoves(const Board& board, int fromRow, int fromColumn); // for checking single move legality (with checks)
+    static std::vector<Move> GeneratePseudoLegalMoves(const Board& board, int fromRow, int fromColumn); // for checking single move legality (without checks)
+
+    static std::vector<Move> GenerateLegalMoves(const Board& board); // for generating all legal moves for the current player (engine)
+
+    
+private:
+    static void AddSlidingMoves(const Board& board, 
+        std::vector<Move>& legalMoves, 
+        int fromRow, int fromColumn, 
+        const int directions[4][2], 
+        const Piece& piece,
+        int directionCount);
 };
 
 #endif
