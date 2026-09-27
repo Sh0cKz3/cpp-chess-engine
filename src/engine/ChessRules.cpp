@@ -1,28 +1,6 @@
 #include "engine/ChessRules.hpp"
 #include <cstdlib>
 
-bool ChessRules::IsPathClear(
-    const Board& board,
-    int fromRow,
-    int fromColumn,
-    int toRow,
-    int toColumn
-) {int rowStep = (toRow > fromRow) ? 1 : (toRow < fromRow) ? -1 : 0;
-    int colStep = (toColumn > fromColumn) ? 1 : (toColumn < fromColumn) ? -1 : 0;
-
-    int currentRow = fromRow + rowStep;
-    int currentCol = fromColumn + colStep;
-
-    while (currentRow != toRow || currentCol != toColumn) {
-        if (board.getPiece(currentRow, currentCol).has_value()) {
-            return false;
-        }
-        currentRow += rowStep;
-        currentCol += colStep;
-    }
-    return true;
-}
-
 bool ChessRules::IsSquareAttacked(
     const Board& board,
     int row,
@@ -200,7 +178,7 @@ bool ChessRules::IsKingInCheck(
 }
 
 bool ChessRules::IsLegalMove(
-    const Board& board,
+    Board& board,
     int fromRow,
     int fromColumn,
     int toRow,
@@ -217,7 +195,7 @@ bool ChessRules::IsLegalMove(
 }
 
 bool ChessRules::HasLegalMoves(
-    const Board& board,
+    Board& board,
     PieceColour colour
 ) {
     for (int fromRow = 0; fromRow < 8; ++fromRow) {
@@ -249,7 +227,7 @@ bool ChessRules::HasLegalMoves(
 }
 
 bool ChessRules::IsCheckmate(
-    const Board& board,
+    Board& board,
     PieceColour colour
 ) {
     return IsKingInCheck(board, colour) &&
@@ -257,7 +235,7 @@ bool ChessRules::IsCheckmate(
 }
 
 bool ChessRules::IsStalemate(
-    const Board& board,
+    Board& board,
     PieceColour colour
 ) {
     return !IsKingInCheck(board, colour) &&
@@ -500,7 +478,7 @@ std::vector<Move> ChessRules::GeneratePseudoLegalMoves(const Board& board, int f
     return legalMoves;
 }
 
-std::vector<Move> ChessRules::GenerateLegalMoves(const Board& board, int fromRow, int fromColumn) {
+std::vector<Move> ChessRules::GenerateLegalMoves(Board& board, int fromRow, int fromColumn){
     std::vector<Move> legalMoves;
     const auto& piece = board.getPiece(fromRow, fromColumn);
 
@@ -520,24 +498,19 @@ std::vector<Move> ChessRules::GenerateLegalMoves(const Board& board, int fromRow
             }
         }
 
-        Board tempBoard = board;
-        
-        // En-Passant check
-        if (piece->type == PieceType::Pawn && move.fromColumn != move.toColumn && !board.getPiece(move.toRow, move.toColumn)) {
-            tempBoard.squares[move.fromRow][move.toColumn].reset();
-        }
+        MoveState state = board.MakeMove(move);
 
-        tempBoard.makeMove(move.fromRow, move.fromColumn, move.toRow, move.toColumn);
-
-        if (!IsKingInCheck(tempBoard, board.GetTurn())) { // getTurn from board, guaranteed to be the right colour
+        if (!IsKingInCheck(board, state.turn)){
             legalMoves.push_back(move);
         }
+
+        board.UnMakeMove(move, state);
     }
 
     return legalMoves;
 }
 
-std::vector<Move> ChessRules::GenerateLegalMoves(const Board& board)
+std::vector<Move> ChessRules::GenerateLegalMoves(Board& board)
 {
     std::vector<Move> legalMoves;
 

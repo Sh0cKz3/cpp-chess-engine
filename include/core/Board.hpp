@@ -2,6 +2,7 @@
 #define CORE_BOARD_HPP
 
 #include "core/Piece.hpp"
+#include "core/Move.hpp"
 #include <utility>
 #include <optional>
 #include <array>
@@ -40,12 +41,10 @@ public:
 
     const std::optional<Piece>& getPiece(int row, int column) const;
 
-    void MovePiece(
-        int fromRow, 
-        int fromColumn, 
-        int toRow, 
-        int toColumn
-    );
+    MoveState MakeMove(const Move& move);
+    void UnMakeMove(const Move& move, const MoveState& state);
+
+    void MovePiece(int fromRow, int fromColumn, int toRow, int toColumn);
 
     PieceColour GetTurn() const;
 
