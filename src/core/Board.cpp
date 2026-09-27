@@ -1,5 +1,5 @@
-#include "Board.hpp"
-#include "Piece.hpp"
+#include "core/Board.hpp"
+#include "core/Piece.hpp"
 #include <cstdlib>
 
 const std::optional<Piece>& Board::getPiece(int row, int column) const {

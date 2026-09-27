@@ -1,7 +1,7 @@
-#ifndef BOARD_HPP
-#define BOARD_HPP
+#ifndef CORE_BOARD_HPP
+#define CORE_BOARD_HPP
 
-#include "Piece.hpp"
+#include "core/Piece.hpp"
 #include <utility>
 #include <optional>
 #include <array>

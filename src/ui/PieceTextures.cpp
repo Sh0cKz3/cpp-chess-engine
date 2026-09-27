@@ -1,4 +1,4 @@
-#include "PieceTextures.hpp"
+#include "ui/PieceTextures.hpp"
 
 PieceTextures::PieceTextures() {
     // Load textures for each piece type and colour

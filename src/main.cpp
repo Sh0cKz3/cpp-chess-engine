@@ -1,8 +1,8 @@
-#include "Piece.hpp"
-#include "Board.hpp"
-#include "Renderer.hpp"
-#include "PieceTextures.hpp"
-#include "ChessRules.hpp"
+#include "core/Piece.hpp"
+#include "core/Board.hpp"
+#include "ui/Renderer.hpp"
+#include "ui/PieceTextures.hpp"
+#include "engine/ChessRules.hpp"
 #include <SFML/Graphics.hpp>
 #include <optional>
 #include <iostream>

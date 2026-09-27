@@ -1,9 +1,9 @@
-#ifndef RENDERER_HPP
-#define RENDERER_HPP
+#ifndef UI_RENDERER_HPP
+#define UI_RENDERER_HPP
 
 #include <SFML/Graphics.hpp>
-#include "Board.hpp"
-#include "PieceTextures.hpp"
+#include "core/Board.hpp"
+#include "ui/PieceTextures.hpp"
 
 class Renderer {
     private:

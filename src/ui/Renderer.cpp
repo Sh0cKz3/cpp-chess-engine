@@ -1,4 +1,4 @@
-#include "Renderer.hpp"
+#include "ui/Renderer.hpp"
 
 Renderer::Renderer(const PieceTextures& pieceTextures, float squareSize) : pieceTextures(pieceTextures), squareSize(squareSize) {    
 }

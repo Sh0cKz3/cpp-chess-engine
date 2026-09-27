@@ -1,4 +1,4 @@
-#include "ChessRules.hpp"
+#include "engine/ChessRules.hpp"
 #include <cstdlib>
 
 bool ChessRules::IsPathClear(

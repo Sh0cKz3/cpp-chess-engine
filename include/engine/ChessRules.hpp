@@ -1,8 +1,8 @@
-#ifndef CHESS_RULLES_HPP
-#define CHESS_RULLES_HPP
+#ifndef CORE_CHESS_RULES_HPP
+#define CORE_CHESS_RULES_HPP
 
-#include "Board.hpp"
-#include "Move.hpp"
+#include "core/Board.hpp"
+#include "core/Move.hpp"
 #include <vector>
 
 class ChessRules

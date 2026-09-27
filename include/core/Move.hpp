@@ -1,5 +1,5 @@
-#ifndef MOVE_HPP
-#define MOVE_HPP
+#ifndef CORE_MOVE_HPP
+#define CORE_MOVE_HPP
 
 struct Move {
     int fromRow;

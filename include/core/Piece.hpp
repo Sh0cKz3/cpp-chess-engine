@@ -1,5 +1,5 @@
-#ifndef PIECE_HPP
-#define PIECE_HPP
+#ifndef CORE_PIECE_HPP
+#define CORE_PIECE_HPP
 
 enum class PieceType
 {

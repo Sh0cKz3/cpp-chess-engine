@@ -1,7 +1,7 @@
-#ifndef PIECE_TEXTURES_HPP
-#define PIECE_TEXTURES_HPP
+#ifndef UI_PIECE_TEXTURES_HPP
+#define UI_PIECE_TEXTURES_HPP
 
-#include "Piece.hpp"
+#include "core/Piece.hpp"
 #include <SFML/Graphics.hpp>
 #include <array>
 

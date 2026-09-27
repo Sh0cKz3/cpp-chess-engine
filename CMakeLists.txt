@@ -9,11 +9,11 @@ find_package(SFML 3 COMPONENTS Graphics Window System REQUIRED)
 
 add_executable(ChessEngine 
 src/main.cpp
-src/Board.cpp
-src/Piece.cpp
-src/PieceTextures.cpp
-src/Renderer.cpp
-src/ChessRules.cpp
+src/core/Board.cpp
+src/core/Piece.cpp
+src/ui/PieceTextures.cpp
+src/ui/Renderer.cpp
+src/engine/ChessRules.cpp
 )
 
 target_include_directories(ChessEngine PRIVATE ${CMAKE_SOURCE_DIR}/include)
