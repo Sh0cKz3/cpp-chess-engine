@@ -3,9 +3,8 @@
 #include "ui/Renderer.hpp"
 #include "ui/PieceTextures.hpp"
 #include "engine/ChessRules.hpp"
+#include "engine/Search.hpp"
 #include <SFML/Graphics.hpp>
-#include "engine/Perft.hpp"
-#include "engine/Evaluation.hpp"
 #include <iostream>
 #include <optional>
 
@@ -19,7 +18,6 @@ int main(){
 
     PieceTextures pieceTextures;
     Renderer renderer(pieceTextures, squareSize);
-
 
     sf::RenderWindow window(
         sf::VideoMode({windowSize, windowSize}),
@@ -101,8 +99,12 @@ int main(){
                             else if (ChessRules::IsStalemate(board, board.GetTurn())) {
                                 std::cout << "STALEMATE!\n";
                                 }
-                            else if (board.IsFiftyMoveDraw()){
+                            else if (board.IsFiftyMoveDraw()) {
                                 std::cout << "50-MOVE DRAW!\n";
+                            }
+                            else {
+                                const Move engineMove = Search::FindBestMove(board, 2);
+                                board.MakeMove(engineMove);
                             }
                         }
                         selectedRow = -1;

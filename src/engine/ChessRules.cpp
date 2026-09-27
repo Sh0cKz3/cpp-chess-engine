@@ -430,8 +430,28 @@ std::vector<Move> ChessRules::GeneratePseudoLegalMoves(const Board& board, int f
         if (toRow >= 0 && toRow < 8) {
             const auto& destinationPiece = board.getPiece(toRow, fromColumn);
             if (!destinationPiece) {
-                Move move{fromRow, fromColumn, toRow, fromColumn};
-                legalMoves.push_back(move);
+                if (toRow == 0 || toRow == 7){ // If next move is promotion, add all promotion options
+                    legalMoves.push_back(Move{
+                        fromRow, fromColumn, toRow, fromColumn, PieceType::Queen
+                    });
+
+                    legalMoves.push_back(Move{
+                        fromRow, fromColumn, toRow, fromColumn, PieceType::Rook
+                    });
+
+                    legalMoves.push_back(Move{
+                        fromRow, fromColumn, toRow, fromColumn, PieceType::Bishop
+                    });
+
+                    legalMoves.push_back(Move{
+                        fromRow, fromColumn, toRow, fromColumn, PieceType::Knight
+                    });
+                }
+                else{
+                    legalMoves.push_back(Move{
+                        fromRow, fromColumn, toRow, fromColumn
+                    });
+                }
 
                 // Double move from starting position
                 if ((piece->colour == PieceColour::White && fromRow == 6) ||
@@ -452,8 +472,28 @@ std::vector<Move> ChessRules::GeneratePseudoLegalMoves(const Board& board, int f
             if (toColumn >= 0 && toColumn < 8) {
                 const auto& destinationPiece = board.getPiece(toRow, toColumn);
                 if (destinationPiece && destinationPiece->colour != piece->colour) {
-                    Move move{fromRow, fromColumn, toRow, toColumn};
-                    legalMoves.push_back(move);
+                    if (toRow == 0 || toRow == 7) { // If next move is promotion, add all promotion options
+                        legalMoves.push_back(Move{
+                            fromRow, fromColumn, toRow, toColumn, PieceType::Queen
+                        });
+
+                        legalMoves.push_back(Move{
+                            fromRow, fromColumn, toRow, toColumn, PieceType::Rook
+                        });
+
+                        legalMoves.push_back(Move{
+                            fromRow, fromColumn, toRow, toColumn, PieceType::Bishop
+                        });
+
+                        legalMoves.push_back(Move{
+                            fromRow, fromColumn, toRow, toColumn, PieceType::Knight
+                        });
+                    }
+                    else {
+                        legalMoves.push_back(Move{
+                            fromRow, fromColumn, toRow, toColumn
+                        });
+                    }
                 }
 
                 // En passant
