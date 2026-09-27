@@ -4,8 +4,10 @@
 #include "ui/PieceTextures.hpp"
 #include "engine/ChessRules.hpp"
 #include <SFML/Graphics.hpp>
-#include <optional>
+#include "engine/Perft.hpp"
+#include "engine/Evaluation.hpp"
 #include <iostream>
+#include <optional>
 
 int main(){
     const int windowSize = {1000};
@@ -14,6 +16,7 @@ int main(){
     int selectedColumn = {-1};
 
     Board board;
+
     PieceTextures pieceTextures;
     Renderer renderer(pieceTextures, squareSize);
 
@@ -26,7 +29,7 @@ int main(){
     while (window.isOpen()) {
         while (const std::optional<sf::Event> event = window.pollEvent()) {
             if (event->is<sf::Event::Closed>()) {
-                window.close();
+                window.close(); 
             }
 
             if (const auto* mouseButtonPressedEvent = event->getIf<sf::Event::MouseButtonPressed>()) {
@@ -91,16 +94,17 @@ int main(){
 
                     else if (ChessRules::IsLegalMove(board, selectedRow, selectedColumn, row, column)) {
                         board.MovePiece(selectedRow, selectedColumn, row, column);
-                        if (ChessRules::IsCheckmate(board, board.GetTurn())) {
-                                std::cout << "CHECKMATE!\n";
+                        if (!board.IsPromotionPending()) {
+                            if (ChessRules::IsCheckmate(board, board.GetTurn())) {
+                                    std::cout << "CHECKMATE!\n";
+                                }
+                            else if (ChessRules::IsStalemate(board, board.GetTurn())) {
+                                std::cout << "STALEMATE!\n";
+                                }
+                            else if (board.IsFiftyMoveDraw()){
+                                std::cout << "50-MOVE DRAW!\n";
                             }
-                        else if (ChessRules::IsStalemate(board, board.GetTurn())) {
-                            std::cout << "STALEMATE!\n";
-                            }
-                        else if (board.IsFiftyMoveDraw()){
-                            std::cout << "50-MOVE DRAW!\n";
                         }
-
                         selectedRow = -1;
                         selectedColumn = -1;
                     }  

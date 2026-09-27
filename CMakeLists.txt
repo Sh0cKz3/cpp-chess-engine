@@ -14,6 +14,8 @@ src/core/Piece.cpp
 src/ui/PieceTextures.cpp
 src/ui/Renderer.cpp
 src/engine/ChessRules.cpp
+src/engine/Perft.cpp
+src/engine/Evaluation.cpp
 )
 
 target_include_directories(ChessEngine PRIVATE ${CMAKE_SOURCE_DIR}/include)

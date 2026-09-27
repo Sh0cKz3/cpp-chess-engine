@@ -58,9 +58,7 @@ void Board::Promote(PieceType type) {
     PromotionRow = -1;
     PromotionColumn = -1;
 
-    if (turn == PieceColour::White) {
-        turn = (turn == PieceColour::White) ? PieceColour::Black : PieceColour::White;
-    }
+    turn = (turn == PieceColour::White) ? PieceColour::Black : PieceColour::White;
 }
 
 void Board::MovePiece(
