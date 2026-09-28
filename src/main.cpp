@@ -76,6 +76,23 @@ int main(){
                                     board.Promote(PieceType::Knight);
                                     break;
                             }
+
+                            if (!board.IsPromotionPending()) // this was missing, so the engine would not move after promotion and thereby human player would switch colours. Fixed
+                            {
+                                if (ChessRules::IsCheckmate(board, board.GetTurn())) {
+                                    std::cout << "CHECKMATE!\n";
+                                }
+                                else if (ChessRules::IsStalemate(board, board.GetTurn())) {
+                                    std::cout << "STALEMATE!\n";
+                                }
+                                else if (board.IsFiftyMoveDraw()) {
+                                    std::cout << "50-MOVE DRAW!\n";
+                                }
+                                else {
+                                    const Move engineMove = Search::FindBestMove(board, 5);
+                                    board.MakeMove(engineMove);
+                                }
+                            }
                         }
 
                         continue; // Skip the rest of the loop to avoid processing the promotion click as a regular move
