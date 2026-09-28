@@ -12,13 +12,23 @@ An ongoing chess application and engine project written from scratch in C++ usin
 - Object-oriented board and piece representation
 - Initial chess position generation
 - Separation of interface and implementation using header/source files
+- Further separation of implementation into core and engine required parts
+- Alpha-beta pruning Minimax algorithm implemented as a search function for the engine
+- Engine linked to GUI so you can now play against it
 
-## Goals
+## Further Development Goals
 
-- Implement legal chess movement
-- Build a fully playable chess application
-- Implement a chess engine
-- Experiment with search algorithms and performance optimisation
+future areas of investigation may include:
+
+- Move ordering
+- Transposition Tables
+- Iterative Deepening
+- Quiescence Search
+- Improving positional evaluation (trivial sum rn)
+- Piece-square tables
+- More efficient board representations
+- Search and move-generation benchmarking
+- Further performance optimisation
 
 ## Technologies
 
@@ -31,8 +41,8 @@ An ongoing chess application and engine project written from scratch in C++ usin
 
 ### Requirements
 
-- C++ compiler
-- CMake
+- C++17-compatible compiler
+- CMake 3.25 or newer
 - SFML 3
 
 ### Build
@@ -51,15 +61,8 @@ Then run using the executable by standard command:
 
     ./build/ChessEngine.exe
 
-## Project Structure
-
-- `include/` — header files
-- `src/` — source files
-- `assets/` — graphical assets
-- `docs/` — project documentation
-- `CMakeLists.txt` — CMake project configuration
-- `CMakePresets.json` — build configuration
-
 ## Status
 
-This project is actively being developed.
+The core chess rules (excluding 3-fold-repetition which I haven't figured out efficiently yet) and a functional search engine are currently implemented.
+
+Continuing to develop the engine, focusing on the algorithm and search side for perfomance optimisations rather than looking to improve the UI, and may consider refactoring to improve the data-structure from the intuitive (which made this easier to build) 2D-array to bitboards which are many times more effective.
