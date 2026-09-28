@@ -103,7 +103,7 @@ int main(){
                                 std::cout << "50-MOVE DRAW!\n";
                             }
                             else {
-                                const Move engineMove = Search::FindBestMove(board, 2);
+                                const Move engineMove = Search::FindBestMove(board, 5);
                                 board.MakeMove(engineMove);
                             }
                         }

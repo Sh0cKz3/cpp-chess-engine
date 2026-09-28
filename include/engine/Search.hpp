@@ -8,7 +8,7 @@ class Search{
     public:
         static Move FindBestMove(Board& board, int depth);
     private:
-        static int SearchPosition(Board& board, int depth);
+        static int SearchPosition(Board& board, int depth, int alpha, int beta);
 };
 
 #endif

@@ -2,7 +2,7 @@
 #include "engine/ChessRules.hpp"
 #include "engine/Evaluation.hpp"
 
-int Search::SearchPosition(Board& board, int depth) {
+int Search::SearchPosition(Board& board, int depth, int alpha, int beta) {
     if (depth == 0) {
         return Evaluation::EvaluateBoard(board);
     }
@@ -29,12 +29,20 @@ int Search::SearchPosition(Board& board, int depth) {
         for (const Move& move : moves) {
             MoveState state = board.MakeMove(move);
 
-            const int score = SearchPosition(board, depth - 1);
+            const int score = SearchPosition(board, depth - 1, alpha, beta);
 
             board.UnMakeMove(move, state);
 
             if (score > bestScore) {
                 bestScore = score;
+            }
+
+            if (bestScore > alpha) { // if better score found for white, update alpha
+                alpha = bestScore;
+            }
+
+            if (alpha >= beta) { // if alpha is greater than or equal to beta, prune the remaining branches
+                break;
             }
         }
     }
@@ -44,12 +52,20 @@ int Search::SearchPosition(Board& board, int depth) {
         for (const Move& move : moves) {
             MoveState state = board.MakeMove(move);
 
-            const int score = SearchPosition(board, depth - 1);
+            const int score = SearchPosition(board, depth - 1, alpha, beta);
 
             board.UnMakeMove(move, state);
 
             if (score < bestScore) {
                 bestScore = score;
+            }
+
+            if (bestScore < beta) { // if better score found for black, update beta
+                beta = bestScore;
+            }
+
+            if (beta <= alpha) { // if beta is less than or equal to alpha, prune the remaining branches
+                break;
             }
         }
     }
@@ -64,19 +80,26 @@ Move Search::FindBestMove(Board& board, int depth) {
     Move bestMove = moves[0];
     int bestScore;
 
+    int alpha = -1000000;
+    int beta = 1000000; 
+
     if (board.GetTurn() == PieceColour::White) {
         bestScore = -1000000;
 
         for (const Move& move : moves) {
             MoveState state = board.MakeMove(move);
 
-            const int score = SearchPosition(board, depth - 1);
+            const int score = SearchPosition(board, depth - 1, alpha, beta);
 
             board.UnMakeMove(move, state);
 
             if (score > bestScore) {
                 bestScore = score;
                 bestMove = move;
+            }
+
+            if (bestScore > alpha) { // if better score found for white, update alpha
+                alpha = bestScore;
             }
         }
     }
@@ -86,13 +109,17 @@ Move Search::FindBestMove(Board& board, int depth) {
         for (const Move& move : moves) {
             MoveState state = board.MakeMove(move);
 
-            const int score = SearchPosition(board, depth - 1);
+            const int score = SearchPosition(board, depth - 1, alpha, beta);
 
             board.UnMakeMove(move, state);
 
             if (score < bestScore) {
                 bestScore = score;
                 bestMove = move;
+            }
+
+            if (bestScore < beta) { // if better score found for black, update beta
+                beta = bestScore;
             }
         }
     }
